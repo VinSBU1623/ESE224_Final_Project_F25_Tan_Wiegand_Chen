@@ -14,27 +14,27 @@ private:
     vector<Drone*> data;
 
 public:
-    Stack() {}
+    Stack() {} //Constructor
 
-    void push(Drone* value) {
+    void push(Drone* value) { //Push value onto stack
         data.push_back(value);
     }
 
-    Drone* pop() {
+    Drone* pop() { //Pop value from stack
         Drone* d = data.back();
         data.pop_back();
         return d;
     }
 
-    Drone* peek() const {
+    Drone* peek() const { //Read from stack without removing
         return data.back();
     }
 
-    bool isEmpty() const {
+    bool isEmpty() const { //Empty?
         return data.empty();
     }
 
-    int size() const {
+    int size() const { //Returns size
         return data.size();
     }
 };
@@ -48,33 +48,33 @@ private:
 public:
     Queue() : front(0) {}
 
-    void enqueue(Drone* d) {
+    void enqueue(Drone* d) { //Push to queue
         data.push_back(d);
     }
 
-    Drone* dequeue() {
+    Drone* dequeue() { //Pop from queue
         return data[front++];
     }
 
-    Drone* peek() const {
+    Drone* peek() const { //Read value without popping
         return data[front];
     }
 
-    bool isEmpty() const {
+    bool isEmpty() const { //Check if empty
         return front >= data.size();
     }
 
-    int size() const {
+    int size() const { //Returns size
         return data.size() - front;
     }
 };
 
 //Node struct for linked list
 struct Node {
-    Drone* drone;
-    Node* next;
+    Drone drone; //Value drone
+    Node* next; //Ptr to next in list
 
-    Node(Drone* d) : drone(d), next(nullptr) {}
+    Node(Drone d) : drone(d), next(nullptr) {} //Constructor
 };
 
 void Depot::addDrone(Drone& d1){
