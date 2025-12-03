@@ -8,6 +8,74 @@
 #include <fstream>
 using namespace std;
 
+//Stack implmentation
+class Stack {
+private:
+    vector<Drone*> data;
+
+public:
+    Stack() {}
+
+    void push(Drone* value) {
+        data.push_back(value);
+    }
+
+    Drone* pop() {
+        Drone* d = data.back();
+        data.pop_back();
+        return d;
+    }
+
+    Drone* peek() const {
+        return data.back();
+    }
+
+    bool isEmpty() const {
+        return data.empty();
+    }
+
+    int size() const {
+        return data.size();
+    }
+};
+
+//Queue implementation
+class Queue {
+private:
+    vector<Drone*> data;
+    int front;
+
+public:
+    Queue() : front(0) {}
+
+    void enqueue(Drone* d) {
+        data.push_back(d);
+    }
+
+    Drone* dequeue() {
+        return data[front++];
+    }
+
+    Drone* peek() const {
+        return data[front];
+    }
+
+    bool isEmpty() const {
+        return front >= data.size();
+    }
+
+    int size() const {
+        return data.size() - front;
+    }
+};
+
+//Node struct for linked list
+struct Node {
+    Drone* drone;
+    Node* next;
+
+    Node(Drone* d) : drone(d), next(nullptr) {}
+};
 
 void Depot::addDrone(Drone& d1){
     drones.push_back(d1);   // add drone to the vector

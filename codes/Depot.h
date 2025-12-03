@@ -28,4 +28,5 @@ class Depot {
         void printAllNames();
         void writeDepotToFile(); //write to depot.txt
 };
+
 #endif
