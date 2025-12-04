@@ -15,6 +15,9 @@ class Drone {
         Drone* nextDrone;
 
     public:
+        // constructor
+        Drone();    
+
         // getters
         string getName();
         int getID();

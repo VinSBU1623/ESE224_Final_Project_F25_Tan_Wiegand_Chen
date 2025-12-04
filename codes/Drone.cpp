@@ -8,6 +8,21 @@ using namespace std;
 
 #define MAX_TASKS 5
 
+// Constructor
+Drone::Drone() {
+    nextDrone = nullptr;
+    ID = 0;         //initialize standard defaults 
+}
+
+// Linked List Methods
+void Drone::setNextDrone(Drone* next){
+    this->nextDrone = next;
+}
+
+Drone* Drone::getNextDrone() const{
+    return this->nextDrone;
+}
+
 //Getters
 string Drone::getName() {
     return name;
