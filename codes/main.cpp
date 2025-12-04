@@ -208,17 +208,22 @@ int main () {
                 else cout << "Not found." << endl;
                 break;
 
-            case 16: { // TEST POLYMORPHISM (Required by Grading Rubric)
+            case 16: { 
                 cout << "Creating an AdvancedDrone for testing..." << endl;
                 AdvancedDrone ad;
                 ad.setName("Advanced-X1");
-                ad.setID(999);
-                ad.enableAutopilot();
+                // Set some dummy tasks so we can see them flip
+                ad.setTaskAtIndex("Task_A", 0); 
+                ad.setTaskAtIndex("Task_E", 4); 
                 
-                // Polymorphism Magic: Ptr is type Drone*, but it calls AdvancedDrone::displayDrone
-                Drone* polyPtr = &ad; 
-                cout << "Displaying via base pointer:" << endl;
-                polyPtr->displayDrone(); 
+                // 1. Drain battery to trigger logic
+                ad.updateBattery(80.0); // 100 - 80 = 20% (Low Battery)
+                
+                // 2. Trigger the reorder
+                ad.autoReorderTasks();
+                
+                // 3. Display to confirm Task_E is now first
+                ad.displayDrone(); 
                 break;
             }
 
