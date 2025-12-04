@@ -206,10 +206,19 @@ int main () {
                 break;
 
             case 16: { 
-                cout << "Creating an AdvancedDrone for testing..." << endl;
                 AdvancedDrone ad;
+                int enableAuto;
+                cout << "Enable Autopilot? YES(1) or NO(0)" << endl;
+                cin >> enableAuto;
+                if(enableAuto == 1){
+                    ad.enableAutopilot();
+                }
+                cout << "Creating an AdvancedDrone for testing..." << endl;
                 ad.setName("Advanced-X1");
                 ad.setTaskAtIndex("Task_A", 0); 
+                ad.setTaskAtIndex("Task_B", 1);
+                ad.setTaskAtIndex("Task_C", 2);
+                ad.setTaskAtIndex("Task_D", 3);
                 ad.setTaskAtIndex("Task_E", 4); 
                 
                 // Drain battery
@@ -218,6 +227,7 @@ int main () {
                 ad.autoReorderTasks();
                 
                 ad.displayDrone(); 
+
                 break;
             }
 
