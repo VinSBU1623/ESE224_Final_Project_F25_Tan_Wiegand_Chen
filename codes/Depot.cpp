@@ -11,157 +11,61 @@
 using namespace std;
 
 
-// ///////// ALEX CHECK THISSSSS!!!!!!!!!!!
-
-// 1. Constructor: Initialize the pointers
+//Constructor
 Depot::Depot() {
     stackTop = nullptr;
     queueFront = nullptr;
     queueRear = nullptr;
-    linkedListHead = nullptr;
+    head = nullptr;
 }
 
-// ==========================================
-//  STACK FUNCTIONS (LIFO - Last In, First Out)
-// ==========================================
+//Drone Stack
 
+//Push
 void Depot::pushDrone(Drone* drone) {
-    // Point the new drone to the current top
     drone->setNextDrone(stackTop);
-    // Move the top pointer to the new drone
     stackTop = drone;
 }
 
+//Pop
 Drone* Depot::popDrone() {
-    // Check if stack is empty
     if (stackTop == nullptr) {
         return nullptr; 
     }
-    
-    // Save the top drone to return it later
-    Drone* temp = stackTop;
-    
-    // Move the top pointer down to the next drone
-    stackTop = stackTop->getNextDrone();
-    
-    // Disconnect the popped drone from the stack for safety
+    Drone* temp = stackTop;    
+    stackTop = stackTop->getNextDrone();    
     temp->setNextDrone(nullptr);
     
     return temp;
 }
 
-// ==========================================
-//  QUEUE FUNCTIONS (FIFO - First In, First Out)
-// ==========================================
+//Drone Queue
 
+//Enqueue
 void Depot::enqueueDrone(Drone* drone) {
-    // This drone will be at the end, so its next is null
     drone->setNextDrone(nullptr);
-    
-    // If the queue is empty, this drone is both front and rear
     if (queueRear == nullptr) {
         queueFront = drone;
         queueRear = drone;
     } else {
-        // Link the old rear to the new drone
         queueRear->setNextDrone(drone);
-        // Update the rear pointer
         queueRear = drone;
     }
 }
 
+//Dequeue
 Drone* Depot::dequeueDrone() {
-    // Check if queue is empty
     if (queueFront == nullptr) {
         return nullptr;
     }
-    
-    // Save the front drone
-    Drone* temp = queueFront;
-    
-    // Move the front pointer to the next drone
-    queueFront = queueFront->getNextDrone();
-    
-    // If the queue is now empty, make sure rear is also null
+    Drone* temp = queueFront;    
+    queueFront = queueFront->getNextDrone();    
     if (queueFront == nullptr) {
         queueRear = nullptr;
-    }
-    
-    // Disconnect the drone
+    }    
     temp->setNextDrone(nullptr);
-    
     return temp;
 }
-
-
-// //Stack implmentation
-// class Stack {
-// private:
-//     vector<Drone*> data;
-
-// public:
-//     Stack() {} //Constructor
-
-//     void push(Drone* value) { //Push value onto stack
-//         data.push_back(value);
-//     }
-
-//     Drone* pop() { //Pop value from stack
-//         Drone* d = data.back();
-//         data.pop_back();
-//         return d;
-//     }
-
-//     Drone* peek() const { //Read from stack without removing
-//         return data.back();
-//     }
-
-//     bool isEmpty() const { //Empty?
-//         return data.empty();
-//     }
-
-//     int size() const { //Returns size
-//         return data.size();
-//     }
-// };
-
-// //Queue implementation
-// class Queue {
-// private:
-//     vector<Drone*> data;
-//     int front;
-
-// public:
-//     Queue() : front(0) {}
-
-//     void enqueue(Drone* d) { //Push to queue
-//         data.push_back(d);
-//     }
-
-//     Drone* dequeue() { //Pop from queue
-//         return data[front++];
-//     }
-
-//     Drone* peek() const { //Read value without popping
-//         return data[front];
-//     }
-
-//     bool isEmpty() const { //Check if empty
-//         return front >= data.size();
-//     }
-
-//     int size() const { //Returns size
-//         return data.size() - front;
-//     }
-// };
-
-// //Node struct for linked list
-// struct Node {
-//     Drone drone; //Value drone
-//     Node* next; //Ptr to next in list
-
-//     Node(Drone d) : drone(d), next(nullptr) {} //Constructor
-// };
 
 void Depot::addDrone(Drone& d1){
     drones.push_back(d1);   // add drone to the vector
