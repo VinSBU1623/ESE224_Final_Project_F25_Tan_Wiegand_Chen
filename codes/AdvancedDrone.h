@@ -19,7 +19,7 @@ public:
         cout << "Autopilot engaged." << endl;
     }
 
-    void updateBattery(float delta) { //Batter - delta
+    void updateBattery(float delta) { //Battery - delta
         batteryLevel -= delta;
         if (batteryLevel < 0) {
             batteryLevel = 0;
@@ -31,27 +31,20 @@ public:
         cout << " [Advanced Features] Battery: " << batteryLevel << "% | Autopilot: " << (autopilotEnabled ? "ON" : "OFF") << endl;
     }
 
-   // Page 6: "if battery < 30%, reverse task order" 
-    void autoReorderTasks() {
+    void autoReorderTasks() { //reorder if below 30% bat
         if (batteryLevel < 30.0) {
             cout << "ALARM: Low Battery (" << batteryLevel << "%)! Reversing task order..." << endl;
             
-            // 1. Get access to the arrays using the parent class getters
             string* tasks = this->getTasks();
             int (*positions)[2] = this->getTaskPositions();
-            
-            // 2. Reverse the arrays (Standard algorithm for size 5)
-            // We swap 0 with 4, and 1 with 3.
             int start = 0;
-            int end = 4; // Since MAX_TASKS is 5
+            int end = 4;
             
-            while (start < end) {
-                // Swap Task Names
+            while (start < end) { //swap swap
                 string tempName = tasks[start];
                 tasks[start] = tasks[end];
-                tasks[end] = tempName;
-                
-                // Swap Task Positions (X and Y)
+                tasks[end] = tempName;   
+
                 int tempX = positions[start][0];
                 int tempY = positions[start][1];
                 
@@ -61,7 +54,7 @@ public:
                 positions[end][0] = tempX;
                 positions[end][1] = tempY;
                 
-                // Move indices towards the center
+                // Move indices
                 start++;
                 end--;
             }
