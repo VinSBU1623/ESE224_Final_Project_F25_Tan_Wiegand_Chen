@@ -16,7 +16,7 @@ class Depot {
         vector<Drone> drones;
 
         // finals new content:
-        Drone* linkedListHead;
+        Drone* head;
 
         Drone* stackTop;
 
