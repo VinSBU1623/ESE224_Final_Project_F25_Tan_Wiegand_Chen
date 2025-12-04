@@ -4,41 +4,35 @@
 #include <vector>
 #include <iostream>
 #include <string>
-#include <cmath> // For position calculation
-#include <algorithm> // For swap
-#include <cstdlib> // For rand
-#include <ctime>   // For time
+#include <cmath>
+#include <algorithm>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
-// Page 5: "template <typename T>" 
+
 template <typename T>
 class DroneManager {
 private:
-    // Page 5: "std::vector<T*> objects;" 
     vector<T*> objects; 
 
 public:
-    // Page 5: "addObject(T* obj): Adds an object to the collection." [cite: 162]
-    void addObject(T* obj) {
+    void addObject(T* obj) { //Add object to vect
         objects.push_back(obj);
     }
 
-    // Page 5: "getObject(int index): Returns an object at a specific index." [cite: 163]
-    T* getObject(int index) {
+    T* getObject(int index) { //Get object from index
         if (index >= 0 && index < objects.size()) {
             return objects[index];
         }
         return nullptr;
     }
 
-    // Page 5: "sortDronesByName(): Sorts drones by name." [cite: 164]
-    // Implementation: using manual Bubble Sort to match your coding style
-    void sortDronesByName() {
+    void sortDronesByName() { //Bubble sort drones by name
         if (objects.empty()) return;
         for (size_t i = 0; i < objects.size() - 1; i++) {
             for (size_t j = 0; j < objects.size() - i - 1; j++) {
-                // Assumes T has getName() method
                 if (objects[j]->getName() > objects[j + 1]->getName()) {
                     swap(objects[j], objects[j + 1]);
                 }
@@ -46,12 +40,10 @@ public:
         }
     }
 
-    // Page 5: "sortDronesByID(): Sorts drones by ID." [cite: 165]
-    void sortDronesByID() {
+    void sortDronesByID() { //Bubble sort drones by id (literally same as last j with ids lol)
         if (objects.empty()) return;
         for (size_t i = 0; i < objects.size() - 1; i++) {
             for (size_t j = 0; j < objects.size() - i - 1; j++) {
-                // Assumes T has getID() method
                 if (objects[j]->getID() > objects[j + 1]->getID()) {
                     swap(objects[j], objects[j + 1]);
                 }
@@ -59,12 +51,10 @@ public:
         }
     }
 
-    // Page 5: "sortDronesByPosition(): Sorts drones by position." [cite: 166]
-    void sortDronesByPosition() {
+    void sortDronesByPosition() { //Sort by pos
         if (objects.empty()) return;
         for (size_t i = 0; i < objects.size() - 1; i++) {
-            for (size_t j = 0; j < objects.size() - i - 1; j++) {
-                // Calculate distances
+            for (size_t j = 0; j < objects.size() - i - 1; j++) { //Distance must be manually calced (calc is short for calculator btw) (elite ball knowledge)
                 int x1 = objects[j]->getInitPosition()[0];
                 int y1 = objects[j]->getInitPosition()[1];
                 double dist1 = sqrt(x1*x1 + y1*y1);
@@ -80,17 +70,14 @@ public:
         }
     }
 
-    // Page 5: "randomizeDroneOrder(): Randomizes the order of drones." [cite: 167]
-    void randomizeDroneOrder() {
-        // Simple manual shuffle
+    void randomizeDroneOrder() { //Randomize
         for (size_t i = 0; i < objects.size(); i++) {
             int randIndex = rand() % objects.size();
             swap(objects[i], objects[randIndex]);
         }
     }
 
-    // Page 5: "searchDroneByName(const std::string& name)" [cite: 168]
-    T* searchDroneByName(const string& name) {
+    T* searchDroneByName(const string& name) { //Linear search by name
         for (size_t i = 0; i < objects.size(); i++) {
             if (objects[i]->getName() == name) {
                 return objects[i];
@@ -99,8 +86,7 @@ public:
         return nullptr;
     }
 
-    // Page 5: "searchDroneByID(int id)" [cite: 169]
-    T* searchDroneByID(int id) {
+    T* searchDroneByID(int id) { //Linear search by id
         for (size_t i = 0; i < objects.size(); i++) {
             if (objects[i]->getID() == id) {
                 return objects[i];
@@ -109,16 +95,14 @@ public:
         return nullptr;
     }
 
-    // Page 5: "printAllDroneNames()" [cite: 170]
-    void printAllDroneNames() {
+    void printAllDroneNames() { //Print drone names
         cout << "--- Drone List (Manager) ---" << endl;
         for (size_t i = 0; i < objects.size(); i++) {
             cout << objects[i]->getName() << " (ID: " << objects[i]->getID() << ")" << endl;
         }
     }
     
-    // Helper to get size (not strictly in manual but needed for loops in main)
-    int getSize() {
+    int getSize() { //Simple helper
         return objects.size();
     }
 };
