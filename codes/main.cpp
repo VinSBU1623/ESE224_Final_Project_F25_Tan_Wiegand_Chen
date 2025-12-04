@@ -205,7 +205,7 @@ int main () {
                 }
                 break;
 
-            case 16: { 
+            case 16: {  // AdvancedDrone implementation (this is extra but we need to show polymorph.)
                 AdvancedDrone ad;
                 int enableAuto;
                 cout << "Enable Autopilot? YES(1) or NO(0)" << endl;
