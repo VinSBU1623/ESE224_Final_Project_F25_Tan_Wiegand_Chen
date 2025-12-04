@@ -19,6 +19,97 @@ Depot::Depot() {
     head = nullptr;
 }
 
+// ====================== NEW STUFFFFFFFFFF ========================
+// --- MISSING HELPER ---
+Drone* Depot::getDronePtr(int index) {
+    if (index >= 0 && index < drones.size()) {
+        return &drones[index];
+    }
+    return nullptr;
+}
+
+// --- LINKED LIST IMPLEMENTATION [cite: 80-82] ---
+void Depot::addDroneToLinkedList(Drone* drone) {
+    // 1. If list is empty
+    if (head == nullptr) {
+        head = drone;
+        drone->setNextDrone(nullptr);
+        return;
+    }
+
+    // 2. Insert sorted by ID (Ascending)
+    if (drone->getID() < head->getID()) {
+        drone->setNextDrone(head);
+        head = drone;
+        return;
+    }
+
+    // 3. Traverse to find spot
+    Drone* current = head;
+    while (current->getNextDrone() != nullptr && 
+           current->getNextDrone()->getID() < drone->getID()) {
+        current = current->getNextDrone();
+    }
+    
+    // 4. Link
+    drone->setNextDrone(current->getNextDrone());
+    current->setNextDrone(drone);
+}
+
+void Depot::removeDroneFromLinkedList(int id) {
+    if (head == nullptr) return;
+
+    // Case 1: Head is the one to remove
+    if (head->getID() == id) {
+        Drone* temp = head;
+        head = head->getNextDrone();
+        temp->setNextDrone(nullptr); // Unlink
+        return;
+    }
+
+    // Case 2: Search for it
+    Drone* current = head;
+    while (current->getNextDrone() != nullptr && current->getNextDrone()->getID() != id) {
+        current = current->getNextDrone();
+    }
+
+    // If found
+    if (current->getNextDrone() != nullptr) {
+        Drone* toDelete = current->getNextDrone();
+        current->setNextDrone(toDelete->getNextDrone());
+        toDelete->setNextDrone(nullptr); // Unlink
+    }
+}
+
+void Depot::printLinkedList() {
+    Drone* current = head;
+    cout << "Linked List: ";
+    while (current != nullptr) {
+        cout << "[ID:" << current->getID() << "] -> ";
+        current = current->getNextDrone();
+    }
+    cout << "NULL" << endl;
+}
+
+// --- SPATIAL TREE WRAPPERS [cite: 131-133] ---
+void Depot::insertToTree(Drone* drone) {
+    spatialTree.insert(drone);
+}
+
+Drone* Depot::searchInTree(int x, int y) {
+    return spatialTree.search(x, y);
+}
+
+
+
+// =====================================================================
+
+
+
+
+
+
+
 //Drone Stack
 
 //Push
