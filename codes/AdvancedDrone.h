@@ -3,40 +3,37 @@
 
 #include "Drone.h"
 #include <iostream>
+using namespace std;
 
-// Page 5: "AdvancedDrone class inherits from Drone" [cite: 192]
-class AdvancedDrone : public Drone {
+class AdvancedDrone : public Drone { //Advanced drone inherits drone
 private:
     float batteryLevel;
     bool autopilotEnabled;
 
 public:
-    // Page 6: Constructor [cite: 197]
+    //Constructor
     AdvancedDrone() : Drone(), batteryLevel(100.0), autopilotEnabled(false) {}
 
-    void enableAutopilot() {
+    void enableAutopilot() { //Enable
         autopilotEnabled = true;
-        std::cout << "Autopilot engaged." << std::endl;
+        cout << "Autopilot engaged." << endl;
     }
 
-    void updateBattery(float delta) {
+    void updateBattery(float delta) { //Batter - delta
         batteryLevel -= delta;
-        if (batteryLevel < 0) batteryLevel = 0;
+        if (batteryLevel < 0) {
+            batteryLevel = 0;
+        }
     }
 
-    // Page 6: "correctly overriding displayInfo" (Manual says displayDrone in code snippet) [cite: 200]
     void displayDrone() override {
-        // Call base display first
         Drone::displayDrone(); 
-        // Add advanced info
-        std::cout << " [Advanced Features] Battery: " << batteryLevel << "% | Autopilot: " 
-                  << (autopilotEnabled ? "ON" : "OFF") << std::endl;
+        cout << " [Advanced Features] Battery: " << batteryLevel << "% | Autopilot: " << (autopilotEnabled ? "ON" : "OFF") << endl;
     }
 
-    // Page 6: "if battery < 30%, reverse task order" [cite: 201]
     void autoReorderTasks() {
         if (batteryLevel < 30.0) {
-            std::cout << "Low Battery! Reordering tasks..." << std::endl;
+            cout << "Low Battery! Reordering tasks..." << endl;
             // Simple reverse logic using standard arrays
             // Note: Since Drone members are private/protected, this logic depends 
             // on Drone.h having 'protected' access or using getters/setters.

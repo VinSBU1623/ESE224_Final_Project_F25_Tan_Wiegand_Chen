@@ -49,7 +49,7 @@ class Depot {
         void insertDroneTask(int droneidx, int taskidx, string& task, int task_pos[2]);
         void sortDroneDataAscending(int idx);
         void sortDroneDataDescending(int idx);
-        void randomizeOrder(); //Manual shuffle, dont use preexsisting libs, might use std::swap
+        void randomizeOrder(); //Manual shuffle, dont use preexsisting libs, might use swap
         void printAllNames();
         void writeDepotToFile(); //write to depot.txt
 
