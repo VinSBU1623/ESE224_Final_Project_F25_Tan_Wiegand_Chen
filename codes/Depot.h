@@ -14,25 +14,19 @@ using namespace std;
 class Depot {
     private:
         vector<Drone> drones;
-
-        // finals new content:
+        
         Drone* head;
-
         Drone* stackTop;
-
         Drone* queueFront;
         Drone* queueRear;
 
-        // finals new content end
-
-        // instances of the Tree and Manager classes
         SpatialTree spatialTree;
         DroneManager<Drone> manager;
 
     public:
-        Depot();    // This is a constructor, we need this to initialize pointers to nullptr
+        Depot();    // Constructor
 
-        // from Midterm =====
+        // from midterm
         void addDrone(Drone& d1);
         Drone& getDrone(int index);
         Drone* getDronePtr(int index);  // NEW!!! (Used for Stacks n Queues)
@@ -55,22 +49,22 @@ class Depot {
 
 
 
-        // === NEW ==== Linked List 
+        //Linked List 
         void addDroneToLinkedList(Drone* drone);
         void removeDroneFromLinkedList(int id);
         void printLinkedList(); // Helper to see if it works
 
-        // === NEW ==== Stacks (LIFO)
+        //Stack
         void pushDrone(Drone* drone);
         Drone* popDrone();
 
-        // === NEW ==== QUEUE (FIFO)
+        //Queue
         void enqueueDrone(Drone* drone);
         Drone* dequeueDrone();
 
-        // === NEW ==== Tree and Template wrappers 
-        void insertToTree(Drone* drone); // Calls spatialTree.insert
-        Drone* searchInTree(int x, int y); // Calls spatialTree.search
+        //Tree and template wrappers 
+        void insertToTree(Drone* drone); 
+        Drone* searchInTree(int x, int y);
 };
 
 #endif

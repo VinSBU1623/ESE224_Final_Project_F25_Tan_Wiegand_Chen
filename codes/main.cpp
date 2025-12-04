@@ -1,6 +1,6 @@
 #include "Drone.h"
 #include "Depot.h"
-#include "AdvancedDrone.h" // Required for Polymorphism
+#include "AdvancedDrone.h"
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -26,9 +26,6 @@ int main () {
 
     int i = 0;
   
-    // ==========================================
-    // 1. READ DRONES FROM FILE (Your existing logic)
-    // ==========================================
     while(infile >> name >> ID >> init_position[0] >> init_position[1] >> 
           tasks[0] >> task_positions[0][0] >> task_positions[0][1] >>
           tasks[1] >> task_positions[1][0] >> task_positions[1][1] >>
@@ -53,22 +50,15 @@ int main () {
     }
     infile.close();
 
-    // ==========================================
-    // 2. INITIALIZE NEW DATA STRUCTURES
-    // ==========================================
-    // The vector is full, but the Linked List and Tree are empty.
-    // We must populate them now so the user can actually use them.
+    
     for(int k=0; k<i; k++) {
         Drone* dPtr = depot.getDronePtr(k);
         if(dPtr != nullptr) {
-            depot.addDroneToLinkedList(dPtr); // Populate List
-            depot.insertToTree(dPtr);         // Populate Spatial Tree
+            depot.addDroneToLinkedList(dPtr);
+            depot.insertToTree(dPtr);
         }
     }
 
-    // ==========================================
-    // 3. NEW MENU (Matching Page 6 of Manual)
-    // ==========================================
     int choice = 0;
     int inputID, x, y;
     string inputName;
@@ -98,10 +88,9 @@ int main () {
         }
 
         switch (choice){
-            case 1: // Add Drone (Linked List Focus)
+            case 1: // Add Drone
                 cout << "Enter existing ID from Depot to add/link: ";
                 cin >> inputID;
-                // In a real app we'd make a new drone, here we link an existing one for simplicity
                 depot.sortByID(); // Ensure sorted for binary search
                 if(depot.searchDroneByID(inputID) != -1) {
                      int idx = depot.searchDroneByID(inputID);
@@ -112,14 +101,14 @@ int main () {
                 }
                 break;
 
-            case 2: // Remove Drone (Linked List)
+            case 2: // Remove Drone
                 cout << "Enter ID to remove from Linked List: ";
                 cin >> inputID;
                 depot.removeDroneFromLinkedList(inputID);
                 cout << "Operation complete." << endl;
                 break;
 
-            case 3: // Show Drones (Standard Display)
+            case 3: // Show Drones
                 for(int k=0; k<i; k++) {
                     depot.getDrone(k).displayDrone();
                     cout << "----------------" << endl;
@@ -136,7 +125,7 @@ int main () {
                 if (depot.getDronePtr(1)) depot.enqueueDrone(depot.getDronePtr(1));
                 if (depot.getDronePtr(2)) depot.enqueueDrone(depot.getDronePtr(2));
                 
-                cout << "Dequeuing one drone (FIFO): ";
+                cout << "Dequeuing one drone: ";
                 if(Drone* d = depot.dequeueDrone()) {
                     cout << d->getName() << endl;
                 } else {
@@ -150,7 +139,7 @@ int main () {
                 if (depot.getDronePtr(1)) depot.pushDrone(depot.getDronePtr(1));
                 if (depot.getDronePtr(2)) depot.pushDrone(depot.getDronePtr(2));
                 
-                cout << "Popping one drone (LIFO): ";
+                cout << "Popping one drone: ";
                 if(Drone* d = depot.popDrone()) {
                     cout << d->getName() << endl;
                 } else {
@@ -212,17 +201,14 @@ int main () {
                 cout << "Creating an AdvancedDrone for testing..." << endl;
                 AdvancedDrone ad;
                 ad.setName("Advanced-X1");
-                // Set some dummy tasks so we can see them flip
                 ad.setTaskAtIndex("Task_A", 0); 
                 ad.setTaskAtIndex("Task_E", 4); 
                 
-                // 1. Drain battery to trigger logic
-                ad.updateBattery(80.0); // 100 - 80 = 20% (Low Battery)
+                // Drain battery
+                ad.updateBattery(80.0);
                 
-                // 2. Trigger the reorder
                 ad.autoReorderTasks();
                 
-                // 3. Display to confirm Task_E is now first
                 ad.displayDrone(); 
                 break;
             }
