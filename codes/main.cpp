@@ -64,14 +64,14 @@ int main () {
     string inputName;
 
     while (true){
-        cout << "\n--- Drone Management Menu ---\n";
-        cout << "1. Add Drone\n2. Remove Drone\n3. Show Drones\n";
-        cout << "4. Use Linked List\n5. Use Queue\n6. Use Stack\n7. Spatial Management\n";
+        cout << "\n--- SkyRoute-II Drone Management Menu ---\n";
+        cout << "1. Add Drone (to Linked List)\n2. Remove Drone (from Linked List)\n3. Show Drones (Vector)\n";
+        cout << "4. Use Linked List (Display)\n5. Use Queue (Demo)\n6. Use Stack (Demo)\n7. Spatial Management (Search)\n";
         cout << "8. Sort Drones by Name\n9. Sort Drones by ID\n";
         cout << "10. Sort Drones by Position\n11. Randomize Drone Order\n";
         cout << "12. Print All Drone Names\n13. Search Drone by Name\n";
         cout << "14. Search Drone by ID\n15. Quit\n";
-        cout << "16. TEST POLYMORPHISM (NOT REQUIRED!!!!)\n"; 
+        cout << "16. TEST POLYMORPHISM (Rubric Req)\n"; 
         
         cout << "Enter choice: ";
         cin >> choice;
@@ -193,7 +193,7 @@ int main () {
                 }
                 break;
 
-            case 14:        // search drone by id
+            case 14: 
                 cout << "Enter ID: ";
                 cin >> inputID;
                 depot.sortByID(); // Required for binary search
@@ -205,20 +205,11 @@ int main () {
                 }
                 break;
 
-            case 16: {  // AdvancedDrone implementation (this is extra but we need to show polymorph.)
-                AdvancedDrone ad;
-                int enableAuto;
-                cout << "Enable Autopilot? YES(1) or NO(0)" << endl;
-                cin >> enableAuto;
-                if(enableAuto == 1){
-                    ad.enableAutopilot();
-                }
+            case 16: { 
                 cout << "Creating an AdvancedDrone for testing..." << endl;
+                AdvancedDrone ad;
                 ad.setName("Advanced-X1");
                 ad.setTaskAtIndex("Task_A", 0); 
-                ad.setTaskAtIndex("Task_B", 1);
-                ad.setTaskAtIndex("Task_C", 2);
-                ad.setTaskAtIndex("Task_D", 3);
                 ad.setTaskAtIndex("Task_E", 4); 
                 
                 // Drain battery
@@ -227,7 +218,6 @@ int main () {
                 ad.autoReorderTasks();
                 
                 ad.displayDrone(); 
-
                 break;
             }
 
