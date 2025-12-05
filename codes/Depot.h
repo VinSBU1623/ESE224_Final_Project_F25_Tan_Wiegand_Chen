@@ -29,7 +29,7 @@ class Depot {
         // from midterm
         void addDrone(Drone& d1);
         Drone& getDrone(int index);
-        Drone* getDronePtr(int index);  // NEW!!! (Used for Stacks n Queues)
+        Drone* getDronePtr(int index);  // Stacks n queues
 
         void sortByName(); //manually, ascending
         void sortByID(); //manually, ascending
@@ -52,7 +52,7 @@ class Depot {
         //Linked List 
         void addDroneToLinkedList(Drone* drone);
         void removeDroneFromLinkedList(int id);
-        void printLinkedList(); // Helper to see if it works
+        void printLinkedList(); 
 
         //Stack
         void pushDrone(Drone* drone);

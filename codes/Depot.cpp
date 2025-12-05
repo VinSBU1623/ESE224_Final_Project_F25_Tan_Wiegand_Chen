@@ -140,7 +140,7 @@ void Depot::addDrone(Drone& d1){
     drones.push_back(d1);   // add drone to the vector
 }
 Drone& Depot::getDrone(int index){
-    return drones.at(index);    // returns the reference to the drone (at the given index)
+    return drones.at(index);    // returns the reference to the drone at index
 }
 void Depot::sortByName(){
     for (int i = 0; i < drones.size() - 1; i++) {   //selection sort
@@ -194,7 +194,7 @@ void Depot::sortByPosition(){
     }
 }
 
-int Depot::searchDroneByName(string& name){     // utilizes binary search!
+int Depot::searchDroneByName(string& name){ //binary search
     int left = 0;
     int right = drones.size() - 1;
     while (left <= right) {
@@ -210,7 +210,7 @@ int Depot::searchDroneByName(string& name){     // utilizes binary search!
     }
     return -1;
 }
-int Depot::searchDroneByID(int id){     // utilizes binary search!
+int Depot::searchDroneByID(int id){// binary search
     int left = 0;   
     int right = drones.size() - 1;
     while (left <= right) {
@@ -226,16 +226,15 @@ int Depot::searchDroneByID(int id){     // utilizes binary search!
     }
     return -1;
 }
-void Depot::swapDroneData(int index1, int index2){     // uses operator overload (-) to swap data. 
+void Depot::swapDroneData(int index1, int index2){
     drones.at(index1) - drones.at(index2);
 }
 
-void Depot::copyDrone(int index1, int index2){      // uses operator overload (<<) to copy data.
+void Depot::copyDrone(int index1, int index2){
     drones.at(index2)<<drones.at(index1);
 }
 
 void Depot::insertDroneTask(int droneidx, int taskidx, string& task, int task_pos[2]){
-    //todo
     drones.at(droneidx).setTaskAtIndex(task, taskidx);
     drones.at(droneidx).setTaskPositionAtIndex(task_pos[0], task_pos[1], taskidx);
 }
@@ -246,7 +245,7 @@ void Depot::sortDroneDataAscending(int idx){
 void Depot::sortDroneDataDescending(int idx){
     drones.at(idx).sortByDescending();
 }
-void Depot::randomizeOrder(){ //Unsure
+void Depot::randomizeOrder(){
     srand(time(0));
     for (int i = 0; i < drones.size(); i++){
         int newpos = rand() % drones.size();
